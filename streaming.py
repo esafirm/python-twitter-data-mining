@@ -36,7 +36,7 @@ class MyListener(StreamListener):
     """Custom StreamListener for streaming data."""
 
     def __init__(self, data_dir, query):
-        super().__init__(self)
+        super().__init__()
         query_fname = format_filename(query)
         self.outfile = "%s/stream_%s.json" % (data_dir, query_fname)
 
@@ -52,8 +52,12 @@ class MyListener(StreamListener):
         return True
 
     def on_error(self, status):
-        print("onError streaming..")
+        print("onError streaming...")
         print(status)
+        return True
+
+    def on_timeout(self):
+        print("Timeout ..")
         return True
 
 
